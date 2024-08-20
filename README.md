@@ -1,27 +1,64 @@
-# ProjectFront
+# Cadastro de Itens - Aplicação Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
+## Descrição
 
-## Development server
+Este projeto é uma aplicação Single Page Application (SPA) desenvolvida com Angular. A aplicação permite o cadastro de itens com diversas funcionalidades e validações 
+para campos de entrada. Os itens podem ser classificados com diferentes unidades de medida e possuem funcionalidades específicas para produtos perecíveis.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Funcionalidades
 
-## Code scaffolding
+- **Cadastro de Itens**: Formulário para cadastrar e editar itens com validação e máscara de entrada.
+- **Unidades de Medida**: Campos ajustáveis com base na unidade de medida selecionada (Litro, Quilograma, Unidade).
+  - **Unidade**: Permite apenas números inteiros.
+- **Validação de Preço**: Validação para garantir que o preço siga o formato monetário correto, com máscara e limite de casas decimais.
+- **Data de Fabricação e Validade**: 
+  - Validação para garantir que a data de fabricação não seja posterior à data de validade para itens perecíveis.
+  - Mensagem de aviso se a data de validade for inferior à data atual.
+- **Responsividade**: Layout adaptável para diferentes tamanhos de tela.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Tecnologias Utilizadas
 
-## Build
+- **Angular 18**: Framework para construção da SPA.
+- **Bootstrap**: Framework CSS para estilização e responsividade.
+- **Ngx-Mask**: Biblioteca para máscaras de entrada.
+- **RxJS**: Biblioteca para programação reativa.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Estrutura do Projeto
 
-## Running unit tests
+- `src/app/models/`: Contém modelos de dados.
+- `src/app/services/`: Contém serviços para manipulação de dados.
+- `src/app/components/`: Contém componentes da aplicação.
+  - `menu.component.ts`: Componente para o menu.
+  - `item-form.component.ts`: Componente para o formulário de itens.
+  - `item-list.component.ts`: Componente para a lista de itens.
+- `app.config.ts`: Configuração da aplicação Angular sem módulos tradicionais.
+- `index.html`: Arquivo principal da aplicação.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Como Executar
 
-## Running end-to-end tests
+1. **Clonar o Repositório**:
+    ```bash
+    git clone https://github.com/FabioAntunesO/project-front
+    cd repo
+    ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+2. **Instalar Dependências**:
+    ```bash
+    npm install
+    ```
 
-## Further help
+3. **Executar a Aplicação**:
+    ```bash
+    ng serve
+    ```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+4. **Acessar no Navegador**:
+    Navegue até `http://localhost:4200` para acessar a aplicação.
+
+## Observações
+
+- Priorizei o cadastro, edição e exclusão de items, junto com validações de nome, quantidade(parcialmente), preço, produto perecivel e data. 
+Foi priorizado também o layout e a responsividade das páginas para fornecer uma comunicação clara e boa usabilidade.
+
+- Algumas validações ficaram incompletas por falta de tempo, como a validação das unidades de medida juntamente com a quantidade, 
+no momento é uma validação complexa para mim e decidi entregar mais itens ao invés de concluir uma validação que pode ser aprimorada posteriormente.

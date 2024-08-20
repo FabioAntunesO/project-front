@@ -1,0 +1,35 @@
+<div class="container mt-4">
+    <button class="btn btn-primary mb-3" (click)="onAdd()">Adicionar Novo Item</button>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Unidade</th>
+            <th>Quantidade</th>
+            <th>Preço</th>
+            <th>Perecível</th>
+            <th>Data de Validade</th>
+            <th>Data de Fabricação</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items">
+            <td>{{ item.name }}</td>
+            <td>{{ item.unit }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price | currency:'BRL':'symbol':'1.2-2' }}</td>
+            <td>{{ item.perishable ? 'Sim' : 'Não' }}</td>
+            <td>{{ item.expirationDate || 'N/A' }}</td>
+            <td>{{ item.manufacturingDate }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm" (click)="onEdit(item.id)">Editar</button>
+              <button class="btn btn-danger btn-sm" (click)="onDelete(item.id)">Excluir</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

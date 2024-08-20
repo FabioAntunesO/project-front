@@ -1,0 +1,101 @@
+<div class="container mt-4">
+  <form [formGroup]="itemForm" (ngSubmit)="onSave()">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="name">Nome do item</label>
+          <input id="name" formControlName="name" class="form-control" />
+          <div *ngIf="itemForm.get('name')?.invalid && itemForm.get('name')?.touched">
+            <small class="text-danger">Nome é obrigatório e deve conter apenas letras (máx. 50 caracteres).</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="unit">Unidade de medida</label>
+          <select id="unit" formControlName="unit" class="form-control">
+            <option value="lt">Litro</option>
+            <option value="kg">Quilograma</option>
+            <option value="un">Unidade</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <label for="quantity">Quantidade</label>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group input-group">
+          <input id="quantity" formControlName="quantity" class="form-control" [mask]="quantityMask" />
+          <span class="input-group-text">{{ unitSuffix }}</span>
+        </div>
+        <div *ngIf="itemForm.get('quantity')?.invalid && itemForm.get('quantity')?.touched">
+          <small class="text-danger">Quantidade inválida.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="price">Preço</label>
+          <input 
+            id="price" 
+            formControlName="price" 
+            class="form-control" 
+            type="text" 
+            prefix="R$ " 
+            [mask]="'separator.2'" 
+            thousandSeparator="."
+            decimalMarker="," />
+          <div *ngIf="itemForm.get('price')?.invalid && itemForm.get('price')?.touched">
+            <small class="text-danger">Preço inválido.</small>
+          </div>
+        </div>
+      </div>
+    </div>    
+
+    <div class="row">
+      <div class="form-group form-check">
+        <input id="perishable" formControlName="perishable" class="form-check-input" type="checkbox"/>
+        <label for="perishable" class="form-check-label">Produto perecível</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <label for="manufacturingDate">Data de fabricação</label>
+        <input id="manufacturingDate" formControlName="manufacturingDate" class="form-control" type="text" placeholder="dd/MM/aaaa" />
+        <div *ngIf="itemForm.get('manufacturingDate')?.errors?.['manufacturingAfterExpiration'] && itemForm.get('manufacturingDate')?.touched">
+          <small class="text-danger">A data de fabricação não pode ser superior à data de validade.</small>
+        </div>
+        <div *ngIf="itemForm.get('manufacturingDate')?.invalid && !itemForm.get('manufacturingDate')?.errors?.['manufacturingAfterExpiration'] && itemForm.get('manufacturingDate')?.touched">
+          <small class="text-danger">Data de fabricação inválida.</small>
+        </div>
+      </div>
+    </div>    
+
+    <div class="row">
+      <div *ngIf="itemForm.get('perishable')?.value" class="form-group">
+        <label for="expirationDate">Data de validade</label>
+        <input id="expirationDate" formControlName="expirationDate" class="form-control" type="text" placeholder="dd/MM/aaaa" />
+        <div *ngIf="itemForm.get('expirationDate')?.errors?.['expired'] && itemForm.get('expirationDate')?.touched">
+          <small class="text-danger">O produto está vencido.</small>
+        </div>
+        <div *ngIf="itemForm.get('expirationDate')?.invalid && !itemForm.get('expirationDate')?.errors?.['expired'] && itemForm.get('expirationDate')?.touched">
+          <small class="text-danger">Data de validade inválida.</small>
+        </div>
+      </div>
+    </div>
+    
+           
+    
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+  </form>
+</div>
